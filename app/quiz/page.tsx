@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import PastelRainbowBg from "@/components/PastelRainbowBg";
+import { useRouter } from "next/navigation";
 
 type Lang = "en" | "ko";
 
@@ -21,7 +22,9 @@ export default function QuizPage() {
   const [revealed, setRevealed] = useState<boolean>(false);
   const [picked, setPicked] = useState<number | null>(null);
   const [showOverlay, setShowOverlay] = useState(false);
-  const [overlayTick, setOverlayTick] = useState(0); // 애니메이션 재트리거용
+  const [overlayTick, setOverlayTick] = useState(0); // 애니메이션 재트리거용\
+
+  const router = useRouter();
 
   useEffect(() => {
     // lang: querystring에서 가져와도 되고, 없으면 저장값/기본값 사용
@@ -164,6 +167,15 @@ export default function QuizPage() {
           `}</style>
         </div>
       )}
+
+      <div className="pt-4 flex justify-center">
+        <button
+          onClick={() => router.push("/")}
+          className="text-slate-500 font-medium transition active:scale-[0.98]"
+        >
+          {lang === "en" ? "Back to home" : "홈으로 돌아가기"}
+        </button>
+      </div>
 
     </PastelRainbowBg>
   );
