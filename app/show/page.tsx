@@ -1,5 +1,9 @@
 import PastelRainbowBg from "@/components/PastelRainbowBg";
 import { getMessage, Lang, Tone } from "@/lib/templates";
+import FullscreenGate from "@/components/FullscreenGate";
+import ShareButton from "@/components/ShareButton";
+
+
 
 export const dynamic = "force-dynamic";
 
@@ -45,6 +49,7 @@ export default async function ShowPage(props: {
 
   return (
     <PastelRainbowBg>
+      <FullscreenGate />
       <main className="min-h-screen flex items-center justify-center p-6 select-none">
         <div className="w-full max-w-4xl text-center space-y-4">
           {/* <div className="text-xs text-slate-600 break-all">{debug}</div> */}
@@ -61,6 +66,15 @@ export default async function ShowPage(props: {
           </div>
         </div>
       </main>
+      {/* ✅ 하단 플로팅 공유 버튼 */}
+      <div className="fixed bottom-4 left-0 right-0 z-40 flex justify-center">
+        <ShareButton
+            title="Say it for me"
+            text="Open this screen"
+            className=""
+            label={lang === "en" ? "Share this service" : "이 서비스 공유하기"}
+        />
+      </div>
     </PastelRainbowBg>
   );
 
