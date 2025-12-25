@@ -53,7 +53,7 @@ export default async function ShowPage(props: {
   return (
     <PastelRainbowBg>
       {/* <FullscreenGate /> */}
-      <main className="min-h-screen flex items-center justify-center p-6 select-none">
+      <main className="min-h-screen flex items-center justify-center p-6 select-none animate-appear">
         <div className="w-full max-w-4xl text-center space-y-4">
           {/* <div className="text-xs text-slate-600 break-all">{debug}</div> */}
 
