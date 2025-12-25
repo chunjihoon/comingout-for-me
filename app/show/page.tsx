@@ -1,25 +1,36 @@
+import PastelRainbowBg from "@/components/PastelRainbowBg";
 import { getMessage, Lang, Tone } from "@/lib/templates";
 
-function clampLang(v: unknown): Lang {
+export const dynamic = "force-dynamic";
+
+function getFirst(v: string | string[] | undefined) {
+  return Array.isArray(v) ? v[0] : v;
+}
+
+function clampLang(v: string | undefined): Lang {
   return v === "ko" ? "ko" : "en";
 }
-function clampTone(v: unknown): Tone {
-  const ok = ["direct", "calm", "soft", "humor"];
-  return (ok.includes(String(v)) ? v : "calm") as Tone;
+
+function clampTone(v: string | undefined): Tone {
+  const ok: Tone[] = ["direct", "calm", "soft", "humor"];
+  return ok.includes(v as Tone) ? (v as Tone) : "calm";
 }
 
-export default function ShowPage({
-  searchParams,
-}: {
-  searchParams: Record<string, string | string[] | undefined>;
+type SearchParams = Record<string, string | string[] | undefined>;
+
+export default async function ShowPage(props: {
+  searchParams: Promise<SearchParams> | SearchParams;
 }) {
-  const lang = clampLang(searchParams.lang);
-  const tone = clampTone(searchParams.tone);
-  const key = typeof searchParams.key === "string" ? searchParams.key : undefined;
-  const msg = typeof searchParams.msg === "string" ? searchParams.msg : undefined;
+  // ✅ Next 16: searchParams may be Promise
+  const sp = (await props.searchParams) as SearchParams;
+
+  const lang = clampLang(getFirst(sp.lang));
+  const tone = clampTone(getFirst(sp.tone));
+  const key = getFirst(sp.key)?.trim() || undefined;
+  const msg = getFirst(sp.msg)?.trim() || undefined;
 
   const message = (() => {
-    if (msg && msg.trim().length > 0) return msg.trim();
+    if (msg) return msg;
     if (key) {
       return (
         getMessage(lang, key, tone) ??
@@ -29,25 +40,29 @@ export default function ShowPage({
     return lang === "en" ? "Pick a message first." : "먼저 문구를 선택하세요.";
   })();
 
-  const hint = lang === "en" ? "Show this screen" : "이 화면을 보여주세요";
+  // ✅ Debug (임시로 확인 후 지워도 됨)
+  const debug = JSON.stringify(sp);
 
   return (
-    <main
-      className="min-h-screen flex items-center justify-center p-6 select-none"
-      style={{ background: "black", color: "white" }}
-    >
-      <div className="w-full max-w-4xl text-center space-y-6">
-        <div className="text-4xl sm:text-6xl md:text-7xl font-semibold leading-tight break-words">
-          {message}
-        </div>
+    <PastelRainbowBg>
+      <main className="min-h-screen flex items-center justify-center p-6 select-none">
+        <div className="w-full max-w-4xl text-center space-y-4">
+          {/* <div className="text-xs text-slate-600 break-all">{debug}</div> */}
 
-        <div className="opacity-70 text-sm">
-          {hint} ·{" "}
-          <a className="underline" href="/">
-            {lang === "en" ? "Back" : "뒤로"}
-          </a>
+          <div className="animate-appear text-4xl sm:text-6xl md:text-7xl font-semibold leading-tight break-words text-slate-900">
+            {message}
+          </div>
+
+          <div className="text-sm text-slate-700/80">
+            {lang === "en" ? "Show this screen" : "이 화면을 보여주세요"} ·{" "}
+            <a className="underline" href="/">
+              {lang === "en" ? "Back" : "뒤로"}
+            </a>
+          </div>
         </div>
-      </div>
-    </main>
+      </main>
+    </PastelRainbowBg>
   );
+
+  
 }
