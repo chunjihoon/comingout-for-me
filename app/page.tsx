@@ -3,7 +3,7 @@
 import { useMemo, useState } from "react";
 import PastelRainbowBg from "@/components/PastelRainbowBg";
 import Link from "next/link";
-
+import Image from "next/image";
 
 
 
@@ -46,17 +46,34 @@ export default function Home() {
 
   return (
     <PastelRainbowBg>
-      <main className="min-h-screen p-6 flex items-center justify-center animate-fade-in">
+      <main className="min-h-[100dvh] p-6 flex justify-center items-start sm:items-center pt-10 sm:pt-6">
         <div className="w-full max-w-xl space-y-6">
-          <header className="space-y-2">
-            <h1 className="text-5xl font-semibold text-slate-900 text-center">
-              {lang === "en" ? "Say it for me" : "대신 말해드립니다"}
-            </h1>
-            <p className="text-sm opacity-70 text-slate-700 text-center">
-              {lang === "en"
-                ? "Pick a style, then show the screen."
-                : "방식을 고르고, 화면을 보여주기만 하면 됩니다."}
-            </p>
+          <header className="w-full max-w-xl mx-auto flex justify-center">
+            <div className="flex flex-col items-center text-center gap-3 md:flex-row md:items-center md:gap-5">
+
+              {/* 로고 */}
+              <div className="flex-shrink-0">
+                <img
+                  src="/logo.png"
+                  alt="logo"
+                  className="w-28 h-28 md:w-24 md:h-24 object-contain"
+                />
+              </div>
+
+              {/* 텍스트 */}
+              <div className="w-full min-w-0">
+                <h1 className="font-semibold text-slate-900 leading-tight break-words text-3xl md:text-5xl">
+                  {lang === "en" ? "Say it for me" : "대신 말해드립니다"}
+                </h1>
+
+                <p className="mt-2 text-slate-700/80 text-sm break-words">
+                  {lang === "en"
+                    ? "Pick a style, then show the screen."
+                    : "방식 고르고, 화면을 보여주기만 하면 됩니다."}
+                </p>
+              </div>
+
+            </div>
           </header>
 
           {/* Language */}

@@ -12,7 +12,7 @@ type Props = {
 
 export default function ShareButton({
   url,
-  title = "Say it for me",
+  title = "Say for me",
   text = "Open this screen",
   label,
   className = "",

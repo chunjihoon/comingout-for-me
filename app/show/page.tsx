@@ -1,7 +1,10 @@
 import PastelRainbowBg from "@/components/PastelRainbowBg";
 import { getMessage, Lang, Tone } from "@/lib/templates";
 //import FullscreenGate from "@/components/FullscreenGate";
-import ShareButton from "@/components/ShareButton";
+//import ShareButton from "@/components/ShareButton";
+import FontSizeControls from "@/components/FontSizeControls";
+import ScaledMessage from "@/components/ScaledMessage";
+
 
 
 
@@ -54,9 +57,10 @@ export default async function ShowPage(props: {
         <div className="w-full max-w-4xl text-center space-y-4">
           {/* <div className="text-xs text-slate-600 break-all">{debug}</div> */}
 
-          <div className="animate-appear text-4xl sm:text-6xl md:text-7xl font-semibold leading-tight break-words text-slate-900">
+          {/* <div className="animate-appear text-4xl sm:text-6xl md:text-7xl font-semibold leading-tight break-words text-slate-900">
             {message}
-          </div>
+          </div> */}
+          <ScaledMessage basePx={56}>{message}</ScaledMessage>
 
           <div className="text-sm text-slate-700/80">
             {lang === "en" ? "Show this screen" : "이 화면을 보여주세요"} ·{" "}
@@ -66,15 +70,16 @@ export default async function ShowPage(props: {
           </div>
         </div>
       </main>
+      <FontSizeControls lang={lang} />
       {/* ✅ 하단 플로팅 공유 버튼 */}
-      <div className="fixed bottom-4 left-0 right-0 z-40 flex justify-center">
+      {/* <div className="fixed bottom-4 left-0 right-0 z-40 flex justify-center">
         <ShareButton
-            title="Say it for me"
+            title="Say for me"
             text="Open this screen"
             className=""
             label={lang === "en" ? "Share this service" : "이 서비스 공유하기"}
         />
-      </div>
+      </div> */}
     </PastelRainbowBg>
   );
 
