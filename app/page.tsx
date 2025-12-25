@@ -63,7 +63,7 @@ export default function Home() {
               {/* 텍스트 */}
               <div className="w-full min-w-0">
                 <h1 className="font-semibold text-slate-900 leading-tight break-words text-3xl md:text-5xl">
-                  {lang === "en" ? "Say it for me" : "대신 말해드립니다"}
+                  {lang === "en" ? "Say for me" : "대신 말해드립니다"}
                 </h1>
 
                 <p className="mt-2 text-slate-700/80 text-sm break-words">
