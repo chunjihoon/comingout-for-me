@@ -1,6 +1,6 @@
 import PastelRainbowBg from "@/components/PastelRainbowBg";
 import { getMessage, Lang, Tone } from "@/lib/templates";
-import FullscreenGate from "@/components/FullscreenGate";
+//import FullscreenGate from "@/components/FullscreenGate";
 import ShareButton from "@/components/ShareButton";
 
 
@@ -49,7 +49,7 @@ export default async function ShowPage(props: {
 
   return (
     <PastelRainbowBg>
-      <FullscreenGate />
+      {/* <FullscreenGate /> */}
       <main className="min-h-screen flex items-center justify-center p-6 select-none">
         <div className="w-full max-w-4xl text-center space-y-4">
           {/* <div className="text-xs text-slate-600 break-all">{debug}</div> */}
